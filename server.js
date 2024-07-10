@@ -23,12 +23,21 @@ const getCursoMock = () => ({
     author: faker.person.fullName()
 })
 
-app.use('/productsmock', (req, res) => {
+app.get('/', (req, res)=>{
+    res.send('Technicoders Company')
+})
+
+app.get('/api/products', (req, res) => {
     const cursos = []
     for (let i = 0; i < 20 ; i++) {
         cursos.push(getCursoMock())        
     }
     res.send({status: 'success', payload: cursos})
+})
+app.get('/api/products/:pid', (req, res) => {
+    const curso = getCursoMock()
+   
+    res.send({status: 'success', payload: curso})
 })
 
 app.use('*', (req, res) => {
