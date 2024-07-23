@@ -7,10 +7,11 @@ export class ProductController {
     constructor() {
         this.service = productService
     }
-    
+
     getProducts = async (req, res) => {            
         try {
-            const cursos = await this.service.getItems()
+            const { cid } = req.query
+            const cursos = await this.service.getItems(cid ? { category: cid  } : {})
             res.send({status: 'success', data: cursos})
             
         } catch (error) {

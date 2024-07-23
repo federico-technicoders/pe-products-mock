@@ -38,7 +38,7 @@ const productSchema = new Schema({
     category: {
         type: String,
         required: true,
-        enum: ['Diseño', 'Desarrollo', 'Marca Personal', 'Creación de contenidos', 'Marketing']
+        enum: ['disenio', 'desarrollo', 'marca-personal', 'creacion-contenidos', 'marketing']
     },
     digital: {
         type: Boolean,

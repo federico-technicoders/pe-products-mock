@@ -11,7 +11,7 @@ const {
 
 
 router.get('/', getProducts)
-router.get('/:pid', getProduct)
+// router.get('/:pid', getProduct)
 router.get('/productsmock', getProductsMock)
 
 export default router

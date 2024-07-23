@@ -5,7 +5,7 @@ export class ProductDaoMongo {
         this.model = productModel
     }
 
-    getAll = async () => await this.model.find()
+    getAll = async filter => await this.model.find(filter)
     getById = async filter => await this.model.findOne(filter)
     create = async productNew => await this.model.create(productNew)
     update = async (id, productUpdate) => await this.model.findByIdAndUpdate(id, productUpdate, {new: true})

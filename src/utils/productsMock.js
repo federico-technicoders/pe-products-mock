@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker'
 
-const categories = ['Diseño', 'Desarrollo', 'Marca Personal', 'Creación de contenidos', 'Marketing']
+const categories = ['disenio', 'desarrollo', 'marca-personal', 'creacion-contenidos', 'marketing']
 
 function getRandomCategory() {
     const randomIndex = Math.floor(Math.random() * categories.length);
@@ -12,7 +12,8 @@ export const getCursoMock = () => ({
     title: faker.commerce.productName(),
     description: faker.commerce.productDescription(),
     price: faker.commerce.price(),
-    image: faker.image.technics(),
+    // image: faker.image.technics(),
+    image: 'https://cronuts.digital/wp-content/uploads/2023/12/CDi5rCVYkPYvkpZ9qKf6WGD5I8mzyDfA3D.png',
     duration: parseInt(faker.number.int()),
     author: faker.person.fullName(),
     created_by: faker.database.mongodbObjectId(),
