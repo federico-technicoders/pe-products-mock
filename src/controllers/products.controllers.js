@@ -20,9 +20,15 @@ export class ProductController {
     }
 
     getProduct = async (req, res) => {
-        const curso = getCursoMock()
-       
-        res.send({status: 'success', data: curso})
+        try {
+            const { id } = req.params
+            const curso = await this.service.getItem(id)
+            if (!curso) return res.status(404).send({ status: 'error', error: 'Producto no encontrado'})            
+            
+            res.send({status: 'success', data: curso})
+        } catch (error) {
+            console.log('Error en getProduct', error)
+        }       
     }
 
     getProductsMock = async (req, res) => {
