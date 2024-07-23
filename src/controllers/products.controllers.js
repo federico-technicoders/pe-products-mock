@@ -1,28 +1,36 @@
-import { randomUUID } from 'crypto'
-import { faker } from '@faker-js/faker'
+import { productService } from "../services/index.js"
+import { getCursoMock } from "../utils/productsMock.js"
+import fs from 'fs'
 
-const getCursoMock = () => ({
-    id: randomUUID(),
-    title: faker.commerce.productName(),
-    description: faker.commerce.productDescription(),
-    price: faker.commerce.price(),
-    image: faker.image.url(),
-    duration: parseInt(faker.number.int()),
-    author: faker.person.fullName()
-})
 
-export class ProductController {
-    getProducts = async (req, res) => {
-        const cursos = []
-        for (let i = 0; i < 20 ; i++) {
-            cursos.push(getCursoMock())        
+export class ProductController {    
+    constructor() {
+        this.service = productService
+    }
+    
+    getProducts = async (req, res) => {            
+        try {
+            const cursos = await this.service.getItems()
+            res.send({status: 'success', data: cursos})
+            
+        } catch (error) {
+            console.log('Error en getProducts', error)
         }
-        res.send({status: 'success', payload: cursos})
     }
 
     getProduct = async (req, res) => {
         const curso = getCursoMock()
        
-        res.send({status: 'success', payload: curso})
+        res.send({status: 'success', data: curso})
+    }
+
+    getProductsMock = async (req, res) => {
+        const cursos = []
+        for (let i = 0; i < 5000 ; i++) {
+            cursos.push(getCursoMock())        
+        }        
+        const write = await fs.promises.writeFile('./cursos.json', JSON.stringify(cursos, null, 2), 'utf8')
+        console.log('Cursos escritos en el archivo')
+        res.send({status: 'success', data: cursos})
     }
 } 
